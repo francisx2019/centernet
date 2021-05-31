@@ -1,0 +1,47 @@
+DATA:
+  ROOT: 'D:\LEARNING\DATA\VOC/'
+  MEAN: [0.40789654, 0.44719302, 0.47026115]
+  STD: [0.22863828, 0.27408164, 0.27809835]
+  down_stride: 4
+  resize: [224, 224]
+  data_mode: 'trainval'
+  classes_name: ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car',
+                 'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse', 'motorbike',
+                 'person', 'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor']
+
+MODEL:
+  device: 'cuda:0'
+  seed: 2021
+  BATCH_SIZE: 1
+  NUM_WORKERS: 4
+  EPOCHS: 100
+  amp: False
+  num_layer: 'r50'
+  FPN: True
+  bn_momentum: 0.1
+  head_channel: 256
+  num_classes: 20
+  down_stride: 4
+  score_theta: 0.8
+  resume: False
+
+  # 学习率与优化函数参数设置
+  lr: 0.01
+  weight_decay: 0.000001
+  amsgrad: True
+  steps: (35000, 40000)
+  gamma: 0.1
+  warmup_iters: 1000
+  max_iter: 45000
+
+  EVAL: False
+
+LOSS:
+  loss_alpha: 1.
+  loss_beta: 0.1
+  loss_gamma: 1.
+
+OUTPUT:
+  log_interval: 20
+  log_dir: './output/log'
+  checkpoint_dir: './output/checkpoint'
